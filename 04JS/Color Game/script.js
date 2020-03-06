@@ -2,8 +2,7 @@ var messageDisplay = document.getElementById("message");
 var squares = document.getElementsByClassName("square");
 var pickedDisplay = document.getElementById("pickedColor");
 var resetButton = document.querySelector("#reset");
-var easyButton = document.querySelector("#easyBtn");
-var hardButton = document.querySelector("#hardBtn");
+var difficultyButtons = document.querySelectorAll(".difficulty");
 var h1 = document.querySelector("h1");
 
 var backgroundColor = "#232323";
@@ -16,22 +15,21 @@ resetGrid();
 
 function initCallbacks() {
 	resetButton.addEventListener("click", function() { resetGrid(); });
-	easyButton.addEventListener("click", function() {
-		easyButton.classList.add("selected");
-		hardButton.classList.remove("selected");
+	
+	// difficulties
+	for (var i = 0; i < difficultyButtons.length; i++) {
+		difficultyButtons[i].addEventListener("click", function() {
+			for (var j = 0; j < difficultyButtons.length; j++)
+				difficultyButtons[j].classList.remove("selected");
+			this.classList.add("selected");
 
-		colorsCount = 3;
-		resetGrid();
-	});
+			colorsCount = this.textContent === "Easy" ? 3 : 6;
 
-	hardButton.addEventListener("click", function() {
-		hardButton.classList.add("selected");
-		easyButton.classList.remove("selected");
+			resetGrid();
+		});
+	}
 
-		colorsCount = 6;
-		resetGrid();
-	});
-
+	// squares
 	for (var i = 0; i < squares.length; i++) {
 		squares[i].addEventListener("click", function() {
 			var clickedColor = this.style.backgroundColor;
@@ -52,7 +50,7 @@ function resetGrid() {
 	colors = generateColors(colorsCount);
 	pickedColor = pickColor();
 	
-	h1.style.backgroundColor = backgroundColor;
+	h1.style.backgroundColor = "steelblue";
 	messageDisplay.textContent = "";
 	resetButton.textContent = "New Colors";
 	pickedDisplay.textContent = pickedColor;
