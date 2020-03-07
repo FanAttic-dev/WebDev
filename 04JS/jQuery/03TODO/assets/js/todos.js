@@ -17,6 +17,6 @@ $("input[type='text']").keypress(function(e){
 
 function addItem(text) {
 	if (text) {
-		$("ul").append("<li><span>X</span>" + text + "</li>");
+		$("ul").append("<li><span><i class='far fa-trash-alt'></i></span>" + text + "</li>");
 	}
 }
