@@ -5,21 +5,43 @@
 	<title>Circle Patatap</title>
 	<!-- Load the Paper.js library -->
 	<script type="text/javascript" src="../../../lib/paperjs-v0.12.4/dist/paper-full.js"></script>
-	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.3/howler.min.js"></script>
+	<script type="text/javascript" src="data.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
 	<!-- Define inlined PaperScript associate it with myCanvas -->
 	<script type="text/paperscript" canvas="myCanvas">
 
-for (var i = 0; i < 10; i++) {
-	for (var j = 0; j < 10; j++) {
-		var colVal = (i+j)*10/255;
-		console.log(colVal);
-		new Path.Circle({
-			center: new Point(i*80, j*80),
-			radius: 10,
-			fillColor: new Color(1-colVal, colVal, 1-colVal)
-		});
+var circles = [];
+
+function onKeyDown(event) {
+	if (!keyData[event.key])
+		return;
+
+	keyData[event.key].sound.play();
+	circles.push(generateRandomCircle(keyData[event.key].color));
+}
+
+function generateRandomCircle(color) {
+	var destination = view.size * Point.random();
+	return Path.Circle({
+		center: destination,
+		radius: 350,
+		fillColor: color
+	});
+}
+
+function onFrame(event) {
+	for (var i = 0; i < circles.length; i++) {
+		if (circles[i].radius < 0.01) {
+			circles.remove(i);
+		} else {
+			circles[i].scale(0.9);
+			circles[i].fillColor.hue += 1;
+		}
 	}
 }
+
+
 	</script>
 </head>
 <body>
