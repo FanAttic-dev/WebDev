@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Circle Patatap</title>
+	<!-- Load the Paper.js library -->
+	<script type="text/javascript" src="../../../lib/paperjs-v0.12.4/dist/paper-full.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+	<!-- Define inlined PaperScript associate it with myCanvas -->
+	<script type="text/paperscript" canvas="myCanvas">
+
+for (var i = 0; i < 10; i++) {
+	for (var j = 0; j < 10; j++) {
+		var colVal = (i+j)*10/255;
+		console.log(colVal);
+		new Path.Circle({
+			center: new Point(i*80, j*80),
+			radius: 10,
+			fillColor: new Color(1-colVal, colVal, 1-colVal)
+		});
+	}
+}
+	</script>
+</head>
+<body>
+	<canvas id="myCanvas" resize></canvas>
+</body>
+</html>
