@@ -5,6 +5,13 @@ body {
 	background: linear-gradient(to right, #96DEDA, #50C9C3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+#container {
+	background-color: #F7F7F7;
+	width: 360px;
+	margin: 100px auto;
+	box-shadow: 0 0 3px rgba(0,0,0,0.1);
+}
+
 h1 {
 	background-color: #2980B9;
 	color: white;
@@ -33,14 +40,21 @@ li:nth-of-type(even) {
 	background-color: #F7F7F7;
 }
 
-.fa-plus {
-	float: right;
+li:hover span {
+	width: 40px;
+	opacity: 100%;
 }
 
-.fa-trash-alt {
-	background-color: red;
+li span {
+	background-color: #E74C3C;
 	color: white;
-	padding: 5px;
+	height: 40px;
+	width: 0;
+	display: inline-block;
+	text-align: center;
+	opacity: 0;
+	margin-right: 20px;
+	transition: 0.5s;
 }
 
 input {
@@ -49,7 +63,7 @@ input {
 	width: 100%;
 	box-sizing: border-box;
 	padding: 13px 13px 13px 20px;
-	border: 3px solid #F7F7F7;
+	border: 3px solid rgba(0,0,0,0);
 	color: #2980B9;
 }
 
@@ -59,14 +73,9 @@ input:focus {
 	outline: none;
 }
 
-#container {
-	background-color: #F7F7F7;
-	width: 360px;
-	margin: 100px auto;
-	padding: 10px;
-	box-shadow: 0 0 3px rgba(0,0,0,0.1);
+.fa-plus {
+	float: right;
 }
-
 
 .done {
 	text-decoration: line-through;

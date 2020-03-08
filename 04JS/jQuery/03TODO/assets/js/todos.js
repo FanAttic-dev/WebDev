@@ -15,6 +15,10 @@ $("input[type='text']").keypress(function(e){
 	}
 });
 
+$("#addIcon i").click(function(){
+	$("input[type='text']").slideToggle();
+});
+
 function addItem(text) {
 	if (text) {
 		$("ul").append("<li><span><i class='far fa-trash-alt'></i></span>" + text + "</li>");
