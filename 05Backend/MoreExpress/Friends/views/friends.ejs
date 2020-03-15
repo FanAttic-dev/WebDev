@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>title</title>
+	</head>
+	<body>
+		<h1>
+			Here is a list of my friends:
+		</h1>
+		
+		<ul>
+			<% friends.forEach((friend) => { %>
+				<li><%= friend %></li>
+			<% }); %>	
+		</ul>
+		
+		<form action="/addFriend" method="post">
+			<input type="text" placeholder="name" name="newFriend">
+			<button>
+				Add Friend
+			</button>
+		</form>
+		
+	</body>
+</html>
