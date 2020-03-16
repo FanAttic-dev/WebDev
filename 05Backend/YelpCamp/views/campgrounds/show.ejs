@@ -38,7 +38,7 @@
                     <form
                         action="/campgrounds/<%= campground._id %>?_method=DELETE"
                         method="POST"
-                        id="deleteForm"
+                        class="deleteForm"
                     >
                         <button class="btn btn-danger">
                             Delete
@@ -70,6 +70,15 @@
                         >
                             Edit
                         </a>
+                        <form
+                            action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE"
+                            method="POST"
+                            class="deleteForm"
+                        >
+                            <button class="btn btn-xs btn-danger">
+                                Delete
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <% }) %>
