@@ -130,6 +130,14 @@ EDIT | /blogs/:id/edit | GET | Show edit page | `Blog.findById()`
 UPDATE | /blogs/:id | PUT | Update and redirect | `Blog.findByIdAndUpdate()` 
 DESTROY | /blogs/:id | DELETE | Delete and redirect | `Blog.findByIdAndRemove()` 
 
+* `method-override` required for update
+  * `npm install method-override`
+  * app.js: 
+    * `methodOverride = require("method-override");`
+    * `app.use(methodOverride("_method"));`
+  *  edit.ejs
+    * `<form action="/<%= object._id %>?_method=PUT" method="POST">`
+
 
 
 # Authentication
