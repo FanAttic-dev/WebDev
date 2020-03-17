@@ -1,5 +1,10 @@
 # NodeJS
 
+* nodemon
+
+  * `npm install -g nodemon`
+* `nodemon app.js`
+  
 * project init
 
   * `npm install express ejs body-parser mongoose method-override --save`
