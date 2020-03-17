@@ -75,39 +75,48 @@
 * Model creation
 
   * ```javascript
+    models/blog.js:
+    
     var blogSchema = new mongoose.Schema({
     	title: String,
+        author: {
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User"
+            },
+            username: String
+        },
     	image: String,
     	body: String,
-    	created: {type: Date, default: Date.now}
+    	created: {type: Date, default: Date.now},
+        comments: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Comment"
+            }
+        ]
     });
     
-    var Blog = mongoose.model("Blog", blogSchema);
+    module.exports = mongoose.model("Blog", blogSchema);
     ```
   
 * Model methods
 
   * ```javascript
-    Blog.find({title: "Title Name"}, function(err, blog){
-        if (err) {
-            console.log(err);
-        } else {
-            console.log(blog);
-        }
-    })
+    var Blog = require("../models/blog");
     
-    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){
-    		if (err) {
-    			res.redirect("/blogs");
-    		} else {
-    			res.redirect("/blogs/" + req.params.id);
-    		}
-    	});
+    Blog.create(req.body.blog, function(err, created) {});
+    
+    Blog.find({title: "Title Name"}, function(err, blog){});
+    
+    Blog.findByIdAndUpdate(req.params.id, req.body.blog, function(err, updatedBlog){});
     ```
   * ```javascript
-    User.findOne({email: "bob@gmail.com"}).populate("posts").exec(function(err, user){...});
+    Blog.findById(req.params.id).populate("comments").exec(function(err, blog) {})
+    
+  User.findOne({email: "bob@gmail.com"}).populate("posts").exec(function(err, user){...});
     ```
-  
+    
   * ```javascript
     Blog.findByIdAndRemove(req.params.id, function(err){});
     ```

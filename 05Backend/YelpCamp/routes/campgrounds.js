@@ -22,24 +22,17 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 
 // CREATE
 router.post("/", middleware.isLoggedIn, function(req, res) {
-    var name = req.body.name;
-    var author = {
+    req.body.campground.author = {
         id: req.user._id,
         username: req.user.username
     };
-    var image = req.body.image;
-    var description = req.body.description;
-    Campground.create(
-        { name: name, author: author, image: image, description: description },
-        function(err) {
-            if (err) {
-                // TODO error message in a form
-                console.log(err);
-            } else {
-                res.redirect("/campgrounds");
-            }
+    Campground.create(req.body.campground, function(err) {
+        if (err) {
+            console.log(err);
+        } else {
+            res.redirect("/campgrounds");
         }
-    );
+    });
 });
 
 // SHOW
